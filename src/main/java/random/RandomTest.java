@@ -29,7 +29,7 @@ public class RandomTest {
 	public static int randomInt(int min, int max){
 		Random random = new Random();
 		//nextInt(n)，生成一个随机的int值，该值介于[0,n)的区间
-		int result = random.nextInt(max)%(max-min) + min;
+		int result = random.nextInt(max-min) + min;
         return result;
 	}
 	
@@ -49,7 +49,7 @@ public class RandomTest {
 	 */
 	private static void check(int min, int max){
 		Map<Integer, Integer> map = new TreeMap<Integer, Integer>();
-        for(int i=0;i<10000;i++){
+        for(int i=0;i<90000;i++){
         	int r = randomInt(min,max);
       
         	if(map.containsKey(r)){

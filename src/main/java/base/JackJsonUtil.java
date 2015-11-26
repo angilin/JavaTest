@@ -30,7 +30,7 @@ public class JackJsonUtil {
 			
     		
 			//abc为Cat中不存在的字段，转成Cat对象会出现错误
-    		s = "{\"id\":null,\"name\":\"aaa\",\"amount\":121.01,\"abc\":\"{\"abcd\":111}\"}";
+    		s = "{\"id\":null,\"name\":\"aaa\",\"amount\":121.01,\"abc\":{\"abcd\":111}}";
 			Map map = strToObj(s, Map.class);
 			System.out.println(map.get("id"));
 			System.out.println(map.get("name"));
