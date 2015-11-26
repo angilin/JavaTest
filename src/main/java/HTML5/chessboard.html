@@ -1,0 +1,73 @@
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<head>
+</head>
+<body>
+<canvas id="c" width="1000px" height="1000px">Your browser does not support the canvas element.</canvas>
+<script>
+	var b = document.body;
+	var c = document.getElementsByTagName('canvas')[0];
+	var a = c.getContext('2d');
+	
+	//绘制长方形的棋盘
+	//x为横轴格子数量，y为纵轴格子数量，l为每个正方形格子的边长
+	r=[];
+	x=10,y=5;
+	l=20;
+	for(i=0;i<x*y;i++)r[i]=0;
+		
+	b.addEventListener('mousedown', onMouseDown, false);
+	
+	paint();
+	
+	
+	function paint(){
+		a.clearRect(0,0,1000,1000);
+		a.beginPath();
+		for(i=0;i<=x;i++){
+			a.moveTo(i*l,0);
+			a.lineTo(i*l,y*l);
+		}
+		for(i=0;i<=y;i++){
+			a.moveTo(0,i*l);
+			a.lineTo(x*l,i*l);
+		}
+		a.stroke();
+		for(i=0;i<x*y;i++){		
+			if(r[i]==8){
+				a.fillStyle = "red";
+				a.fillRect(i%x*l,(i/x|0)*l,l,l);
+			}
+			else if(r[i]==9){
+				a.fillStyle = "green";
+				a.fillRect(i%x*l,(i/x|0)*l,l,l);
+			}
+			else if(r[i]==1){
+				//light gray
+				a.fillStyle = "rgba(192,192,192,1)";
+				a.fillRect(i%x*l,(i/x|0)*l,l,l);
+			}
+		}
+	}
+	
+	function onMouseDown(e){
+		ex=e.layerX/l|0;
+		ey=e.layerY/l|0;
+		if(r[ey*x+ex]==0){
+			r[ey*x+ex]=1;
+			paint();
+		}
+		else if(r[ey*x+ex]==1){
+			r[ey*x+ex]=0;
+			paint();
+		}
+	}
+	
+	
+	/\d+/.test(111);
+		
+	
+
+</script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<head>
+<script type="text/javascript">
+</script>
+</head>
+<body>
+
+
+<h2>checkbox</h2>
+<input type="checkbox" id="check1" value="111" onclick="document.getElementById('txtcheck1').innerHTML=this.checked;" />
+是否选中:<span id="txtcheck1"></span>
+<br/>
+<input type="checkbox" value="111" checked/>
+<input type="checkbox" value="111" checked="checked"/>
+<input type="checkbox" value="111" checked="true"/>
+<input type="checkbox" value="111" checked="false"/>
+默认选中（就算checked="false"，也是默认选中）
+<br/>
+<input type="checkbox" id="check5" name="group1" value="111" onclick="for(i=0;i<document.getElementsByName('group1').length;i++){document.getElementsByName('group1')[i].checked=this.checked;}"/>
+全选/联动
+<input type="checkbox" id="check6" name="group1" value="111"/>
+<input type="checkbox" id="check7" name="group1" value="111"/>
+
+<h2>radio</h2>
+<input type="radio" name="radio1" value="1" onclick="document.getElementById('txtradio1').innerHTML=this.value;"/>1
+<input type="radio" name="radio1" value="2" onclick="document.getElementById('txtradio1').innerHTML=this.value;"/>2
+选中内容：<span id="txtradio1"></span>    单选，需要name相同
+
+<h2>select</h2>
+<select id="select1"></select>
+<br/>
+text<input type="text" id="optionText" size="10" onkeypress="if(event.keyCode==13)document.getElementById('select1').options.add(new Option(this.value,document.getElementById('optionValue').value));">
+value<input type="text" id="optionValue" size="10" onkeypress="if(event.keyCode==13)document.getElementById('select1').options.add(new Option(document.getElementById('optionText').value,this.value));">
+在文本框内输入内容后回车，可以添加选项到选择框
+<br/>
+<input type="button" onclick="s=document.getElementById('select1');document.getElementById('select1Value').innerHTML=s.options[s.selectedIndex].value;" value="获取选择框的值"/>
+:<span id="select1Value"></span>
+<input type="button" onclick="s=document.getElementById('select1');s.options.remove(s.selectedIndex);" value="删除当前选项"/>
+
+</body>
+</html>
