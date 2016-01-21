@@ -7,7 +7,7 @@
   <version>1.0</version>
   <packaging>jar</packaging>
 
-  <name>TestProject</name>
+  <name>JavaTest</name>
   <url>http://maven.apache.org</url>
 
   <properties>
@@ -105,5 +105,36 @@
 		<artifactId>gson</artifactId>
 		<version>2.3.1</version>
 	</dependency> -->
+	
+	
+	<dependency>
+			<groupId>net.sf.dozer</groupId>
+			<artifactId>dozer</artifactId>
+			<version>5.4.0</version>
+		</dependency>
+		
+	
+	<!-- fastdfs client 
+	下载地址https://github.com/happyfish100/fastdfs-client-java，使用ant生成jar
+	mvn install:install-file -DgroupId=org.csource -DartifactId=fastdfs-client-java -Dversion=5.0.4 -Dpackaging=jar -Dfile=D:\fastdfs_client.jar 
+	-->
+	<dependency>
+      <groupId>org.csource</groupId>
+      <artifactId>fastdfs-client-java</artifactId>
+      <version>5.0.4</version>
+    </dependency>
+		
+	<dependency>
+		<groupId>commons-io</groupId>
+		<artifactId>commons-io</artifactId>
+		<version>2.4</version>
+	</dependency>	
+		
+		
+		
   </dependencies>
+  
+  
+  	
+  
 </project>
