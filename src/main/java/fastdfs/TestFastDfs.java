@@ -16,6 +16,16 @@ import org.csource.fastdfs.StorageServer;
 import org.csource.fastdfs.TrackerClient;
 import org.csource.fastdfs.TrackerServer;
 
+/**
+ * fastdfs测试类
+ * 
+ * 缺少fastdfs_client.jar的解决方法
+ * 下载地址https://github.com/happyfish100/fastdfs-client-java，使用ant生成jar
+ * 把生成的jar包上传到本地仓库 
+ * 类似 mvn install:install-file -DgroupId=org.csource -DartifactId=fastdfs-client-java -Dversion=5.0.4 -Dpackaging=jar -Dfile=D:\fastdfs_client.jar 
+ * 
+ *
+ */
 public class TestFastDfs {
 
 	public static String conf_filename = "src/main/resource/conf/fdfs_client.conf";

@@ -106,7 +106,7 @@
 		<version>2.3.1</version>
 	</dependency> -->
 	
-	
+	<!-- bean拷贝工具 -->
 	<dependency>
 			<groupId>net.sf.dozer</groupId>
 			<artifactId>dozer</artifactId>
@@ -116,6 +116,7 @@
 	
 	<!-- fastdfs client 
 	下载地址https://github.com/happyfish100/fastdfs-client-java，使用ant生成jar
+	把生成的jar包上传到本地仓库
 	mvn install:install-file -DgroupId=org.csource -DartifactId=fastdfs-client-java -Dversion=5.0.4 -Dpackaging=jar -Dfile=D:\fastdfs_client.jar 
 	-->
 	<dependency>
