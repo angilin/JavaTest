@@ -62,6 +62,11 @@ public class JackJsonUtil {
 	    	try {
 				A a2 = JackJsonUtil.strToObj(JackJsonUtil.objToStr(a), A.class);
 				System.out.println(a2.getCatList().get(1).getAmount());
+				
+				A a3 = new A();
+				BeanMapper.copy(a2, a3);
+				System.out.println(a3.getCatList().get(1).getAmount());
+				
 			} catch (JsonParseException e) {
 				e.printStackTrace();
 			} catch (JsonMappingException e) {
@@ -82,7 +87,7 @@ public class JackJsonUtil {
 		}
     }
     
-    private static class Cat{
+    public static class Cat{
     	private Long id;
     	private String name;
     	private BigDecimal amount;
