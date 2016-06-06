@@ -2,11 +2,11 @@ package file;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStreamReader;
 
 /**
  * 
@@ -20,7 +20,21 @@ public class ReadAndWriteTextFile {
 
 	public static void main(String[] args){
 		System.out.println(System.getProperty("line.separator"));
-		writeFile("D:\\test.txt", readFile("d:\\eclipse.txt"),false);
+		System.out.println(readFile("d:\\00225619\\桌面\\新建文本文档.html"));
+		//writeFile("D:\\test.txt", readFile("d:\\eclipse.txt"),false);
+	}
+	
+	/**
+	 * 
+	  * Title: readFile <br>
+	  * Description: 读取文本文件内容到字符串  ，字符集UTF-8，换行符使用系统换行符  <br>
+	  * @param filePath 文件绝对路径
+	  * @return 
+	  * String 返回类型  文件内容  <br>
+	  * @throws
+	 */
+	public static String readFile(String filePath){
+		return readFile(filePath, "UTF-8", System.getProperty("line.separator"));
 	}
 	
 	/**
@@ -28,12 +42,13 @@ public class ReadAndWriteTextFile {
 	  * Title: readFile <br>
 	  * Description: 读取文本文件内容到字符串  ，换行符使用系统换行符  <br>
 	  * @param filePath 文件绝对路径
+	  * @param charset 字符集
 	  * @return 
 	  * String 返回类型  文件内容  <br>
 	  * @throws
 	 */
-	public static String readFile(String filePath){
-		return readFile(filePath, System.getProperty("line.separator"));
+	public static String readFile(String filePath, String charset){
+		return readFile(filePath, charset, System.getProperty("line.separator"));
 	}
 	
 	/**
@@ -41,17 +56,17 @@ public class ReadAndWriteTextFile {
 	  * Title: readFile <br>
 	  * Description: 读取文本文件内容到字符串  <br>
 	  * @param filePath 文件绝对路径
+	  * @param charset 字符集
 	  * @param lineBreak 自定换行符
 	  * @return 
 	  * String 返回类型 文件内容  <br>
 	  * @throws
 	 */
-	public static String readFile(String filePath, String lineBreak){
-		File file = new File(filePath);
+	public static String readFile(String filePath, String charset, String lineBreak){
 		BufferedReader reader = null;
 		StringBuilder s = new StringBuilder();
 		try {
-			reader = new BufferedReader(new FileReader(file));
+			reader = new BufferedReader(new InputStreamReader(new FileInputStream(filePath),charset));
 			String line = null;
 			while((line = reader.readLine())!=null){
 				s.append(line);
