@@ -1,6 +1,7 @@
 package htmlparse;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class PbccrcReport {
@@ -11,9 +12,9 @@ public class PbccrcReport {
 	
 	private String certNo;
 	
-	private String queryTime;
+	private Date queryTime;
 	
-	private String reportTime;
+	private Date reportTime;
 	
 	private String maritalStatus;
 	
@@ -31,23 +32,25 @@ public class PbccrcReport {
 	
 	private String creditRecordSummary;
 	
-	private String creditCardTotal;
-	private String creditCardActive;
-	private String creditCardOverdue;
-	private String creditCardSeriousOverdue;
-	private String creditCardGuarantee;
+	private Integer creditCardTotal;
+	private Integer creditCardActive;
+	private Integer creditCardOverdue;
+	private Integer creditCardSeriousOverdue;
+	private Integer creditCardGuarantee;
 	
-	private String housingLoanTotal;
-	private String housingLoanActive;
-	private String housingLoanOverdue;
-	private String housingLoanSeriousOverdue;
-	private String housingLoanGuarantee;
+	private Integer housingLoanTotal;
+	private Integer housingLoanActive;
+	private Integer housingLoanOverdue;
+	private Integer housingLoanSeriousOverdue;
+	private Integer housingLoanGuarantee;
 	
-	private String otherLoanTotal;
-	private String otherLoanActive;
-	private String otherLoanOverdue;
-	private String otherLoanSeriousOverdue;
-	private String otherLoanGuarantee;
+	private Integer otherLoanTotal;
+	private Integer otherLoanActive;
+	private Integer otherLoanOverdue;
+	private Integer otherLoanSeriousOverdue;
+	private Integer otherLoanGuarantee;
+	
+	private String errorMsg;
 	
 	private List<PbccrcCreditRecord> creditRecords;
 	
@@ -77,19 +80,19 @@ public class PbccrcReport {
 		this.certNo = certNo;
 	}
 
-	public String getQueryTime() {
+	public Date getQueryTime() {
 		return queryTime;
 	}
 
-	public void setQueryTime(String queryTime) {
+	public void setQueryTime(Date queryTime) {
 		this.queryTime = queryTime;
 	}
 
-	public String getReportTime() {
+	public Date getReportTime() {
 		return reportTime;
 	}
 
-	public void setReportTime(String reportTime) {
+	public void setReportTime(Date reportTime) {
 		this.reportTime = reportTime;
 	}
 
@@ -161,124 +164,132 @@ public class PbccrcReport {
 		return creditRecords;
 	}
 	
-	public String getCreditCardTotal() {
+	public Integer getCreditCardTotal() {
 		return creditCardTotal;
 	}
 
-	public void setCreditCardTotal(String creditCardTotal) {
+	public void setCreditCardTotal(Integer creditCardTotal) {
 		this.creditCardTotal = creditCardTotal;
 	}
 
-	public String getCreditCardActive() {
+	public Integer getCreditCardActive() {
 		return creditCardActive;
 	}
 
-	public void setCreditCardActive(String creditCardActive) {
+	public void setCreditCardActive(Integer creditCardActive) {
 		this.creditCardActive = creditCardActive;
 	}
 
-	public String getCreditCardOverdue() {
+	public Integer getCreditCardOverdue() {
 		return creditCardOverdue;
 	}
 
-	public void setCreditCardOverdue(String creditCardOverdue) {
+	public void setCreditCardOverdue(Integer creditCardOverdue) {
 		this.creditCardOverdue = creditCardOverdue;
 	}
 
-	public String getCreditCardSeriousOverdue() {
+	public Integer getCreditCardSeriousOverdue() {
 		return creditCardSeriousOverdue;
 	}
 
-	public void setCreditCardSeriousOverdue(String creditCardSeriousOverdue) {
+	public void setCreditCardSeriousOverdue(Integer creditCardSeriousOverdue) {
 		this.creditCardSeriousOverdue = creditCardSeriousOverdue;
 	}
 
-	public String getCreditCardGuarantee() {
+	public Integer getCreditCardGuarantee() {
 		return creditCardGuarantee;
 	}
 
-	public void setCreditCardGuarantee(String creditCardGuarantee) {
+	public void setCreditCardGuarantee(Integer creditCardGuarantee) {
 		this.creditCardGuarantee = creditCardGuarantee;
 	}
 
-	public String getHousingLoanTotal() {
+	public Integer getHousingLoanTotal() {
 		return housingLoanTotal;
 	}
 
-	public void setHousingLoanTotal(String housingLoanTotal) {
+	public void setHousingLoanTotal(Integer housingLoanTotal) {
 		this.housingLoanTotal = housingLoanTotal;
 	}
 
-	public String getHousingLoanActive() {
+	public Integer getHousingLoanActive() {
 		return housingLoanActive;
 	}
 
-	public void setHousingLoanActive(String housingLoanActive) {
+	public void setHousingLoanActive(Integer housingLoanActive) {
 		this.housingLoanActive = housingLoanActive;
 	}
 
-	public String getHousingLoanOverdue() {
+	public Integer getHousingLoanOverdue() {
 		return housingLoanOverdue;
 	}
 
-	public void setHousingLoanOverdue(String housingLoanOverdue) {
+	public void setHousingLoanOverdue(Integer housingLoanOverdue) {
 		this.housingLoanOverdue = housingLoanOverdue;
 	}
 
-	public String getHousingLoanSeriousOverdue() {
+	public Integer getHousingLoanSeriousOverdue() {
 		return housingLoanSeriousOverdue;
 	}
 
-	public void setHousingLoanSeriousOverdue(String housingLoanSeriousOverdue) {
+	public void setHousingLoanSeriousOverdue(Integer housingLoanSeriousOverdue) {
 		this.housingLoanSeriousOverdue = housingLoanSeriousOverdue;
 	}
 
-	public String getHousingLoanGuarantee() {
+	public Integer getHousingLoanGuarantee() {
 		return housingLoanGuarantee;
 	}
 
-	public void setHousingLoanGuarantee(String housingLoanGuarantee) {
+	public void setHousingLoanGuarantee(Integer housingLoanGuarantee) {
 		this.housingLoanGuarantee = housingLoanGuarantee;
 	}
 
-	public String getOtherLoanTotal() {
+	public Integer getOtherLoanTotal() {
 		return otherLoanTotal;
 	}
 
-	public void setOtherLoanTotal(String otherLoanTotal) {
+	public void setOtherLoanTotal(Integer otherLoanTotal) {
 		this.otherLoanTotal = otherLoanTotal;
 	}
 
-	public String getOtherLoanActive() {
+	public Integer getOtherLoanActive() {
 		return otherLoanActive;
 	}
 
-	public void setOtherLoanActive(String otherLoanActive) {
+	public void setOtherLoanActive(Integer otherLoanActive) {
 		this.otherLoanActive = otherLoanActive;
 	}
 
-	public String getOtherLoanOverdue() {
+	public Integer getOtherLoanOverdue() {
 		return otherLoanOverdue;
 	}
 
-	public void setOtherLoanOverdue(String otherLoanOverdue) {
+	public void setOtherLoanOverdue(Integer otherLoanOverdue) {
 		this.otherLoanOverdue = otherLoanOverdue;
 	}
 
-	public String getOtherLoanSeriousOverdue() {
+	public Integer getOtherLoanSeriousOverdue() {
 		return otherLoanSeriousOverdue;
 	}
 
-	public void setOtherLoanSeriousOverdue(String otherLoanSeriousOverdue) {
+	public void setOtherLoanSeriousOverdue(Integer otherLoanSeriousOverdue) {
 		this.otherLoanSeriousOverdue = otherLoanSeriousOverdue;
 	}
 
-	public String getOtherLoanGuarantee() {
+	public Integer getOtherLoanGuarantee() {
 		return otherLoanGuarantee;
 	}
 
-	public void setOtherLoanGuarantee(String otherLoanGuarantee) {
+	public void setOtherLoanGuarantee(Integer otherLoanGuarantee) {
 		this.otherLoanGuarantee = otherLoanGuarantee;
+	}
+	
+	public String getErrorMsg() {
+		return errorMsg;
+	}
+
+	public void setErrorMsg(String errorMsg) {
+		this.errorMsg = errorMsg;
 	}
 
 	public void setCreditRecords(List<PbccrcCreditRecord> creditRecords) {
