@@ -32,6 +32,9 @@ public class PbccrcReport {
 	
 	private String creditRecordSummary;
 	
+	private Integer assetTotal;
+	private Integer repaymentTotal;
+	
 	private Integer creditCardTotal;
 	private Integer creditCardActive;
 	private Integer creditCardOverdue;
@@ -290,6 +293,22 @@ public class PbccrcReport {
 
 	public void setErrorMsg(String errorMsg) {
 		this.errorMsg = errorMsg;
+	}
+	
+	public Integer getAssetTotal() {
+		return assetTotal;
+	}
+
+	public void setAssetTotal(Integer assetTotal) {
+		this.assetTotal = assetTotal;
+	}
+
+	public Integer getRepaymentTotal() {
+		return repaymentTotal;
+	}
+
+	public void setRepaymentTotal(Integer repaymentTotal) {
+		this.repaymentTotal = repaymentTotal;
 	}
 
 	public void setCreditRecords(List<PbccrcCreditRecord> creditRecords) {
