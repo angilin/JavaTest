@@ -1,8 +1,12 @@
 package htmlparse;
 
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -10,8 +14,14 @@ import org.jsoup.nodes.Element;
 import org.jsoup.parser.Parser;
 import org.jsoup.select.Elements;
 
+import base.JackJsonUtil;
 import file.ReadAndWriteTextFile;
 
+/**
+ * 人行征信报告解析
+ * @author angilin.huang
+ *
+ */
 public class PbccrcUtil {
 
 	public static void main(String[] args) {
@@ -21,6 +31,7 @@ public class PbccrcUtil {
 						"E:\\征信\\央行征信\\个人信用报告-公共记录.html",
 						"GBK");
 		PbccrcReport report = getPbccrcContent(htmlContent);
+		System.out.println(report.getName());
 		System.out.println(report.getCertType());
 		System.out.println(report.getMaritalStatus());
 
@@ -32,38 +43,51 @@ public class PbccrcUtil {
 
 		System.out.println(report.getCreditCardActive());
 		System.out.println(report.getCreditRecords());
+		System.out.println(report.getCommonRecordDetail());
 		System.out.println(report.getErrorMsg());
-		for(PbccrcCreditRecord r : report.getCreditRecords()){
-			System.out.println(r.getType()+":"+r.getContent());
+		if(report.getCreditRecords()!=null){
+			for(PbccrcCreditRecord r : report.getCreditRecords()){
+				System.out.println(r.getType()+":"+r.getContent());
+			}
 		}
-		for(PbccrcQueryRecord r : report.getQueryRecords()){
-			System.out.println(r.getType()+":"+r.getQueryNo()+","+r.getQueryDate()+","+r.getOperator()+","+r.getQueryReason());
+		if(report.getQueryRecords()!=null){
+			for(PbccrcQueryRecord r : report.getQueryRecords()){
+				System.out.println(r.getType()+":"+r.getQueryNo()+","+r.getQueryDate()+","+r.getOperator()+","+r.getQueryReason());
+			}
 		}
 	}
 	
+	/**  机构查询记录	 */
 	private static final String QUERY_RECORD_TYPE_ORG = "1";
+	/**  个人查询记录	 */
 	private static final String QUERY_RECORD_TYPE_SELF = "2";
-	
+	/**  发生过逾期的贷记卡账户明细记录	 */
 	private static final String CREDIT_RECORD_TYPE_CREDIT_CARD_OVERDUE = "1";
+	/**  从未逾期过的贷记卡及透支未超过60天的准贷记卡账户明细记录	 */
 	private static final String CREDIT_RECORD_TYPE_CREDIT_CARD_NORMAL = "2";
-	
+	/**  发生过逾期的购房贷款账户明细记录	 */
 	private static final String CREDIT_RECORD_TYPE_HOUSING_LOAN_OVERDUE = "11";
+	/**  从未逾期过的购房贷款账户明细记录	 */
 	private static final String CREDIT_RECORD_TYPE_HOUSING_LOAN_NORMAL = "12";
-	
+	/**  发生过逾期的其他贷款账户明细记录	 */
 	private static final String CREDIT_RECORD_TYPE_OTHER_LOAN_OVERDUE = "21";
+	/**  从未逾期过的其他贷款账户明细记录	 */
 	private static final String CREDIT_RECORD_TYPE_OTHER_LOAN_NORMAL = "22";
-	
+	/**  为他人担保信息	 */
 	private static final String CREDIT_RECORD_TYPE_GUARANTEE = "31";
-	
+	/**  资产处置信息	 */
+	public static final String CREDIT_RECORD_TYPE_ASSET = "41";
+	/**  保证人代偿信息	 */
 	private static final String CREDIT_RECORD_TYPE_REPAYMENT = "42";
 	
 	//适应201606样式修改后的报告
-	//因为没有数据样本，缺少【公共记录】 的解析
+	//因为没有数据样本，缺少【公共记录】，【资产处置信息】 的解析
 	public static PbccrcReport getPbccrcContent(String htmlContent) {
-			PbccrcReport report = new PbccrcReport();
+		PbccrcReport report = new PbccrcReport();
 
-			StringBuilder errorMsg = new StringBuilder();
+		StringBuilder errorMsg = new StringBuilder();
 			
+		try{
 			DateFormat df = new SimpleDateFormat("yyyy.MM.dd HH:mm:ss");
 			
 			Document doc = Jsoup.parse(htmlContent, "", Parser.xmlParser());
@@ -101,7 +125,7 @@ public class PbccrcUtil {
 						errorMsg.append("报告时间转换失败，原值为"+e.text().substring(5, e.text().length())+"。");
 					}
 				} else if (e.text().startsWith("姓名")) {
-					report.setName(e.text().substring(5, e.text().length()));
+					report.setName(e.text().substring(3, e.text().length()).trim());
 				} else if (e.text().startsWith("证件类型")) {
 					report.setCertType(e.text().substring(5, e.text().length()));
 				} else if (e.text().startsWith("证件号码")) {
@@ -295,10 +319,31 @@ public class PbccrcUtil {
 				}
 			}
 			
-			report.setErrorMsg(errorMsg.toString());
-
-			return report;
+			
+			//公共记录-法院强制执行记录
+			Elements e5 = body.select("span[class=h1]:contains(强制执行记录) + table");
+			Elements courtEnforcementElements = e5.select("td");
+			Map<String, String> courtEnforcementMap = new HashMap<String,String>();
+			for (int i = 0; i < courtEnforcementElements.size(); i++) {
+				Element e = courtEnforcementElements.get(i);
+				if(e.text().indexOf("：")!=-1){
+					courtEnforcementMap.put(e.text().substring(0,e.text().indexOf("：")), e.text().substring(e.text().indexOf("：")+1,e.text().length()));
+				}
+			}
+			if(!courtEnforcementMap.isEmpty()){
+				report.setCommonRecordDetail(JackJsonUtil.objToStr(courtEnforcementMap));
+			}
 		}
+		catch(Exception ex){
+			StringWriter sw = new StringWriter();  
+	        ex.printStackTrace(new PrintWriter(sw, true));  
+	        errorMsg.append(sw.toString().length()>1000?sw.toString().substring(0, 999):sw.toString());
+		}
+			
+		report.setErrorMsg(errorMsg.toString());
+
+		return report;
+	}
 	
 	
 	//因为没有数据样本，缺少【购房贷款】、【为他人担保】、【公共记录】 的解析
